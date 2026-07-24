@@ -3,164 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AutoMax - Venta de Carros</title>
+<title>Juego de Carros</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-    background:#f4f4f4;
-}
-
-header{
-    background:#111;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-nav{
-    background:#d40000;
-    padding:15px;
-    text-align:center;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 15px;
-    font-weight:bold;
-}
-
-.hero{
-    background:url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600") center/cover;
-    height:450px;
+    background:#222;
     display:flex;
     justify-content:center;
     align-items:center;
-    color:white;
-    text-align:center;
+    height:100vh;
+    font-family:Arial,sans-serif;
 }
 
-.hero h1{
-    font-size:55px;
-    text-shadow:2px 2px 10px black;
-}
-
-.hero p{
-    font-size:22px;
-}
-
-.boton{
-    display:inline-block;
-    margin-top:20px;
-    background:#d40000;
-    color:white;
-    padding:15px 30px;
-    text-decoration:none;
-    border-radius:5px;
-}
-
-.autos{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:25px;
-    padding:40px;
-}
-
-.tarjeta{
-    background:white;
-    width:320px;
-    border-radius:10px;
+#game{
+    width:400px;
+    height:700px;
+    background:#555;
+    position:relative;
     overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    border:6px solid #fff;
 }
 
-.tarjeta img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
+.line{
+    position:absolute;
+    width:10px;
+    height:100px;
+    background:white;
+    left:195px;
 }
 
-.tarjeta h3{
-    padding:15px;
+.player{
+    position:absolute;
+    width:60px;
+    height:110px;
+    background:red;
+    border-radius:12px;
+    bottom:20px;
+    left:170px;
 }
 
-.tarjeta p{
-    padding:0 15px 15px;
+.enemy{
+    position:absolute;
+    width:60px;
+    height:110px;
+    background:deepskyblue;
+    border-radius:12px;
 }
 
-.precio{
-    color:#d40000;
+#score{
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:white;
     font-size:24px;
     font-weight:bold;
-}
-
-footer{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:20px;
+    z-index:100;
 }
 </style>
-
 </head>
 <body>
 
-<header>
-    <h1>🚗 AutoMax</h1>
-    <p>Los mejores carros al mejor precio</p>
-</header>
+<div id="game">
 
-<nav>
-    <a href="#">Inicio</a>
-    <a href="#">Catálogo</a>
-    <a href="#">Promociones</a>
-    <a href="#">Contacto</a>
-</nav>
+<div id="score">Puntos: 0</div>
 
-<section class="hero">
-    <div>
-        <h1>Encuentra el carro de tus sueños</h1>
-        <p>Modelos deportivos, familiares y de lujo.</p>
-        <a href="#" class="boton">Ver Catálogo</a>
-    </div>
-</section>
+<div class="player" id="player"></div>
 
-<section class="autos">
-
-<div class="tarjeta">
-    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" alt="BMW">
-    <h3>BMW M4</h3>
-    <p>Motor turbo, diseño deportivo y máxima potencia.</p>
-    <p class="precio">$85,000</p>
 </div>
 
-<div class="tarjeta">
-    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800" alt="Mustang">
-    <h3>Ford Mustang GT</h3>
-    <p>Potencia V8 y un diseño clásico americano.</p>
-    <p class="precio">$60,000</p>
-</div>
+<script>
 
-<div class="tarjeta">
-    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800" alt="Audi">
-    <h3>Audi R8</h3>
-    <p>Superdeportivo con un rendimiento impresionante.</p>
-    <p class="precio">$170,000</p>
-</div>
+const game=document.getElementById("game");
+const player=document.getElementById("player");
+const scoreText=document.getElementById("score");
 
-</section>
+let score=0;
+let speed=6;
 
-<footer>
-    <p>© 2026 AutoMax | Venta de Carros</p>
-</footer>
+let playerX=170;
+
+const lanes=[20,95,170,245,320];
+
+document.addEventListener("keydown",e=>{
+
+    let index=lanes.indexOf(playerX);
+
+    if(e.key==="ArrowLeft" && index>0){
+        playerX=lanes[index-1];
+    }
+
+    if(e.key==="ArrowRight" && index<lanes.length-1){
+        playerX=lanes[index+1];
+    }
+
+    player.style.left=playerX+"px";
+
+});
+
+for(let i=0;i<8;i++){
+
+    let line=document.createElement("div");
+    line.className="line";
+    line.style.top=(i*100)+"px";
+    game.appendChild(line);
+
+}
+
+function moveLines(){
+
+    document.querySelectorAll(".line").forEach(line=>{
+
+        let top=parseInt(line.style.top);
+
+        top+=speed;
+
+        if(top>700){
+            top=-100;
+        }
+
+        line.style.top=top+"px";
+
+    });
+
+}
+
+function createEnemy(){
+
+    let enemy=document.createElement("div");
+
+    enemy.className="enemy";
+
+    enemy.style.left=lanes[Math.floor(Math.random()*lanes.length)]+"px";
+
+    enemy.style.top="-120px";
+
+    game.appendChild(enemy);
+
+}
+
+setInterval(createEnemy,1000);
+
+function moveEnemies(){
+
+    document.querySelectorAll(".enemy").forEach(enemy=>{
+
+        let top=parseInt(enemy.style.top);
+
+        top+=speed;
+
+        enemy.style.top=top+"px";
+
+        let eLeft=parseInt(enemy.style.left);
+
+        if(
+            top>560 &&
+            top<660 &&
+            eLeft===playerX
+        ){
+            alert("💥 ¡Game Over!\nPuntos: "+score);
+            location.reload();
+        }
+
+        if(top>720){
+
+            enemy.remove();
+
+            score++;
+
+            scoreText.innerHTML="Puntos: "+score;
+
+            if(score%10===0){
+                speed++;
+            }
+
+        }
+
+    });
+
+}
+
+function gameLoop(){
+
+    moveLines();
+
+    moveEnemies();
+
+    requestAnimationFrame(gameLoop);
+
+}
+
+gameLoop();
+
+</script>
 
 </body>
 </html>
