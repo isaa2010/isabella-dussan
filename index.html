@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoMax - Venta de Carros</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#111;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+nav{
+    background:#d40000;
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+.hero{
+    background:url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600") center/cover;
+    height:450px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:55px;
+    text-shadow:2px 2px 10px black;
+}
+
+.hero p{
+    font-size:22px;
+}
+
+.boton{
+    display:inline-block;
+    margin-top:20px;
+    background:#d40000;
+    color:white;
+    padding:15px 30px;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.autos{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    padding:40px;
+}
+
+.tarjeta{
+    background:white;
+    width:320px;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.tarjeta img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.tarjeta h3{
+    padding:15px;
+}
+
+.tarjeta p{
+    padding:0 15px 15px;
+}
+
+.precio{
+    color:#d40000;
+    font-size:24px;
+    font-weight:bold;
+}
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>🚗 AutoMax</h1>
+    <p>Los mejores carros al mejor precio</p>
+</header>
+
+<nav>
+    <a href="#">Inicio</a>
+    <a href="#">Catálogo</a>
+    <a href="#">Promociones</a>
+    <a href="#">Contacto</a>
+</nav>
+
+<section class="hero">
+    <div>
+        <h1>Encuentra el carro de tus sueños</h1>
+        <p>Modelos deportivos, familiares y de lujo.</p>
+        <a href="#" class="boton">Ver Catálogo</a>
+    </div>
+</section>
+
+<section class="autos">
+
+<div class="tarjeta">
+    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" alt="BMW">
+    <h3>BMW M4</h3>
+    <p>Motor turbo, diseño deportivo y máxima potencia.</p>
+    <p class="precio">$85,000</p>
+</div>
+
+<div class="tarjeta">
+    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800" alt="Mustang">
+    <h3>Ford Mustang GT</h3>
+    <p>Potencia V8 y un diseño clásico americano.</p>
+    <p class="precio">$60,000</p>
+</div>
+
+<div class="tarjeta">
+    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800" alt="Audi">
+    <h3>Audi R8</h3>
+    <p>Superdeportivo con un rendimiento impresionante.</p>
+    <p class="precio">$170,000</p>
+</div>
+
+</section>
+
+<footer>
+    <p>© 2026 AutoMax | Venta de Carros</p>
+</footer>
+
+</body>
+</html>
